@@ -1,299 +1,184 @@
 # Kickstart Linux Mint
 ### Table of Contents
- 1. [Common Dependencies](#common-dependencies)
- 2. [Common Tools & Drivers](#common-tools--drivers)
- 3. [Git & Github](#git--github)
- 4. [Theme](#theme)
- 5. [Neovim](#neovim)
- 6. [Terminal & Shell](#terminal--shell)
- 7. [Node.js](#nodejs)
- 8. [Laravel](#laravel)
- 9. [Visual Studio Code](#visual-studio-code)
- 10. [Other Tools](#other-tools)
- 11. [Docker](#docker)
- 12. [MySQL](#mysql)
- 13. [DigitalOcean](#digitalocean)
- 14. [Useful Commands](#useful-commands)
+   1. [Common Dependencies](#common-dependencies)
+   2. [Common Tools & Drivers](#common-tools--drivers)
+   3. [Git & Github](#git--github)
+   4. [Theme](#theme)
+   5. [Neovim](#neovim)
+   6. [Terminal & Shell](#terminal--shell)
+   7. [Node.js](#nodejs)
+   8. [Laravel](#laravel)
+   9. [Visual Studio Code](#visual-studio-code)
+   10. [Other Tools](#other-tools)
+   11. [Docker](#docker)
+   12. [MySQL](#mysql)
+   13. [DigitalOcean](#digitalocean)
+   14. [Useful Commands](#useful-commands)
 
-### Common Dependencies
- * `sudo apt install net-tools`
- * `sudo apt install curl`
- * `sudo apt install python3-pip`
-<br>
+### Common Dependencies And Software
+```sh
+sudo apt install curl net-tools python3-pip \
+  spotify-client git vim sha256sum jq automake autoconf \
+  libreadline-dev libncurses-dev libssl-dev libyaml-dev \
+  libxslt-dev libffi-dev libtool unixodbc-dev unzip
+ ```
 
 ### Common Tools & Drivers
 #### Nvidia Driver
-> *Software & Updates > Additional Drivers*
+* *Driver Manager > Install Recommended Driver*
 
-#### KeePass 
-``` sh
-sudo apt install keepass2
-```
-
-#### OBS
-``` sh
-sudo add-apt-repository ppa:obsproject/obs-studio
-sudo apt install obs-studio
-```
-
-#### Ubuntu Software
- * Dropbox 
- * Spotify
- * GIMP
-
-<br>
+If resolution is strange after restart you probably need to: 
+> `sudo apt remove xserver-xorg-video-fbdev`
 
 ### Git & Github
 #### Install Git & Configure SSH
- 1. `sudo apt install git`
- 2. [Generate SSH Key](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/)
- 3. [Add SSH Key to Github Account](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/)
-
-#### [Gitbatch](https://github.com/isacikgoz/gitbatch)
-``` sh
-# lines 1, 2 and 4 must be modified for newer versions
-curl -OL https://github.com/isacikgoz/gitbatch/releases/download/v0.4.2/gitbatch_0.4.1_linux_amd64.tar.gz
-tar xzf gitbatch_0.4.2_linux_amd64.tar.gz
-mv gitbatch ~/bin
-rm gitbatch_0.4.2_linux_amd64.tar.gz
-```
-
-#### [Oh My Repos](https://github.com/utkuufuk/oh-my-repos)
- 1. `sudo apt install myrepos`
- 2. `git clone https://github.com/utkuufuk/oh-my-repos`
- 3. `pip3 install oh-my-repos/.`
- 4. `rm -rf oh-my-repos`
-
-<br>
+   1. [Generate SSH Key](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/)
+   2. [Add SSH Key to Github Account](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/)
 
 ### Theme
 #### Fonts
- 1. [Hack](https://github.com/source-foundry/Hack/releases/download/v3.003/Hack-v3.003-ttf.zip)
- 2. [Courier Prime Code](https://www.fontsquirrel.com/fonts/courier-prime-code)
- 3. [Input](http://input.fontbureau.com/download/index.html?size=15&language=python&theme=monokai&family=InputMono&width=300&weight=400&line-height=1.3&a=ss&g=ss&i=serifs_round&l=serifs_round&zero=slash&asterisk=height&braces=0&preset=default&customize=please)
- 4. Fira Code
-    ``` sh
-    sudo apt install fonts-firacode
-    ```
- 5. Source Code Pro
-    ``` sh
-    git clone --depth 1 --branch release https://github.com/adobe-fonts/source-code-pro.git ~/.fonts/adobe-fonts/source-code-pro
-    fc-cache -f -v ~/.fonts/adobe-fonts/source-code-pro
-    ```
-
-#### Gnome Theme
-  * `sudo add-apt-repository -u ppa:snwh/ppa`
-  * `sudo apt update`
-  * `sudo apt install paper-icon-theme`
-  * `sudo apt install gnome-tweak-tool`
-  * *Tweaks > Appearance > Applications > Adwaita-dark*
-  * *Tweaks > Appearance > Icons > Paper*
-  * *Tweaks > Fonts > [your_favourite_font]*
-
-#### Desktop Slideshow
-> *Shotwell Photo Manager > Select Pictures > File > Set as Desktop Slideshow*
-<br>
-
-### Neovim
- 1. [Install Neovim](https://github.com/neovim/neovim)
-    1. `sudo apt install neovim`
-    2. `curl -o ~/.config/nvim/init.vim --create-dirs https://raw.githubusercontent.com/utkuufuk/ubuntu-on-steroids/master/init.vim`
-
- 2. [Install Vim-Plug](https://github.com/junegunn/vim-plug)
-    > `curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim`
-
- 3. Activate plugins by using the command `:PlugInstall` in `vim ~/.config/nvim/init.vim`
-
-<br>
-
+Source Code Pro
+   ``` sh
+   git clone --depth 1 --branch release https://github.com/adobe-fonts/source-code-pro.git ~/.fonts/adobe-fonts/source-code-pro
+   fc-cache -f -v ~/.fonts/adobe-fonts/source-code-pro
+   ```
 ### Terminal & Shell
-#### [Tilix](https://github.com/gnunn1/tilix)
- 1. Install Tilix
-    > `sudo apt install tilix`
- 2. Install Dracula Theme
-    ```sh
-    curl -o ~/.config/tilix/schemes/Dracula.json --create-dirs https://raw.githubusercontent.com/dracula/tilix/master/Dracula.json
-    ```
- 3. Customize Tilix Appearance
-    * *Preferences > Appearance > Window Style > Disable CSD && hide toolbar*
-    * *Preferences > Appearance > Terminal Title Style > None*
-    * *Preferences > Profile > Color > Color scheme > Dracula*
- 4. Configure Tilix Keyboard Shortcuts
-    * *Preferences > Shortcuts > Replace **`Switch to next session`** shortcut with **`Alt+Right`***
-    * *Preferences > Shortcuts > Replace **`Switch to previous session`** shortcut with **`Alt+Left`***
-    * *Preferences > Shortcuts > Replace **`Paste`** shortcut with **`Ctrl+V`***
-    * *Preferences > Shortcuts > Replace **`Resize the terminal down`** shortcut with **`Shift+Ctrl+Down`***
-    * *Preferences > Shortcuts > Replace **`Resize the terminal up`** shortcut with **`Shift+Ctrl+Up`***
-    * *Preferences > Shortcuts > Replace **`Resize the terminal right`** shortcut with **`Shift+Ctrl+Right`***
-    * *Preferences > Shortcuts > Replace **`Resize the terminal left`** shortcut with **`Shift+Ctrl+Left`***
- 5. Configure System Keyboard Shortcuts
-    * *Keyboard Shortcuts > Remove Default Action for **`Ctrl+Alt+T`***
-    * *Keyboard Shortcuts > Bind **`Ctrl+Alt+T`** to Custom Shortcut for Launching Tilix*
-    * *Keyboard Shortcuts > Disable Shortcut for **`Hide all normal windows`***
+#### Tilix
+1. Install Tilix
+   > `sudo add-apt-repository ppa:webupd8team/terminix`
+   
+   > `sudo apt update`
+   
+   > `sudo apt install tilix`
+   
+   1.1. To fix the vte warnings
+   
+   > `sudo ln -s /etc/profile.d/vte-2.91.sh /etc/profile.d/vte.sh` 
+   
+   1.2. And append to end of `.zshrc`
 
-#### [Zsh](https://github.com/robbyrussell/oh-my-zsh/wiki/Installing-ZSH)
- 1. Install Zsh
-    * `sudo apt install zsh`
-    * `chsh -s $(which zsh)`
-    * `gnome-session-quit`
-    * *Login*
-    * `echo $SHELL`
- 2. [Oh My Zsh](https://github.com/robbyrussell/oh-my-zsh)
-    * `sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"`
- 3. [Spaceship Prompt](https://github.com/denysdovhan/spaceship-prompt)
-    * `git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt"`
-    * `ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"`
- 4. [Zsh Autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
-    * `git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions`
-    * `echo "bindkey '^ ' autosuggest-accept" >> $ZSH_CUSTOM/autosuggestion-settings.zsh`
-    * `source $ZSH_CUSTOM/autosuggestion-settings.zsh`
- 5. [Zsh Syntax Highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
-    * `git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting`
- 6. Configure `.zshrc`
-    * `curl -o ~/.zshrc https://raw.githubusercontent.com/utkuufuk/ubuntu-on-steroids/master/.zshrc`
-    * `source ~/.zshrc`
-<br>
+   ```sh
+   if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+   source /etc/profile.d/vte.sh
+   fi
+   ```
 
-### Node.js
-#### Install NVM
-Note that the version number may differ:
-``` sh
-# download the installer script
-curl -sL https://raw.githubusercontent.com/creationix/nvm/v0.35.0/install.sh -o install_nvm.sh
+2. Install Dracula Theme
+   ```sh
+   curl -o ~/.config/tilix/schemes/Dracula.json --create-dirs https://raw.githubusercontent.com/dracula/tilix/master/Dracula.json
+   ```
 
-# install
-chmod +x install_nvm.sh && ./install_nvm.sh
+3. Customize Tilix Appearance
+   * *Preferences > Profile > Color > Color scheme > Dracula*
+4. Configure Tilix Keyboard Shortcuts (Optional)
+   * *Preferences > Shortcuts > Replace **`Switch to next session`** shortcut with **`Alt+Right`***
+   * *Preferences > Shortcuts > Replace **`Switch to previous session`** shortcut with **`Alt+Left`***
+   * *Preferences > Shortcuts > Replace **`Paste`** shortcut with **`Ctrl+V`***
+   * *Preferences > Shortcuts > Replace **`Resize the terminal down`** shortcut with **`Shift+Ctrl+Down`***
+   * *Preferences > Shortcuts > Replace **`Resize the terminal up`** shortcut with **`Shift+Ctrl+Up`***
+   * *Preferences > Shortcuts > Replace **`Resize the terminal right`** shortcut with **`Shift+Ctrl+Right`***
+   * *Preferences > Shortcuts > Replace **`Resize the terminal left`** shortcut with **`Shift+Ctrl+Left`***
+5. Configure System Keyboard Shortcuts (Optional)
+   * *Keyboard Shortcuts > Remove Default Action for **`Ctrl+Alt+T`***
+   * *Keyboard Shortcuts > Bind **`Ctrl+Alt+T`** to Custom Shortcut for Launching Tilix*
+   * *Keyboard Shortcuts > Disable Shortcut for **`Hide all normal windows`***
 
-# delete installer
-rm install_nvm.sh
+#### ZSH
+1. Install Zsh
+   * `sudo apt install zsh`
+   * `chsh -s $(which zsh)`
+2. [ZimFW](https://github.com/zimfw/zimfw)
+   * `curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh`
+6. Add git aliases to `.zshrc`
+   ```sh
+   alias gp="git push"
+   alias gl="git pull"
+   alias g="git status"
+   alias gca="git commit -a"
+   alias gc="git checkout" 
+   ```
 
-# update current session
-source ~/.profile
-```
+### ASDF
+#### Install ASDF
 
-#### Install Node.js
-```sh
-# list available versions
-nvm ls-remote
 
-# install desired version(s) 
-nvm install x.y.z
+1. Install by cloning and sourcing (Note that the version number may differ)
+   ``` sh
+   git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.7.8
+   . $HOME/.asdf/asdf.sh
+   ```
+2. Add plugins
+   ```sh
+   asdf plugin add erlang
+   asdf plugin add elixir
+   asdf plugin add nodejs
+   asdf plugin add ruby
+   asdf plugin-add java https://github.com/halcyon/asdf-java.git
 
-# use desired node version
-nvm use x.y.z
+   # source nodejs keyring
+   bash ~/.asdf/plugins/nodejs/bin/import-release-team-keyring
+   ```
 
-# update npm
-npm install npm@latest -g
-```
+3. Add asdf script and completions to .zshrc
+   ```sh
+   echo -e "\n. $HOME/.asdf/asdf.sh" >> ~/.zshrc
+   echo -e "\nfpath=(${ASDF_DIR}/completions $fpath)" >> ~/.zshrc
+   echo -e "\nautoload -Uz compinit && compinit" >> ~/.zshrc
+   ```
 
-#### Configure
-``` sh
-npm config set init.author.name <name>
-npm config set init.author.email <email>
-```
+4. Install plugins (this may vary A LOT)
+   ```sh
+   ASDF_CONCURRENCY=4 asdf install ruby 2.6.5
+   asdf global ruby 2.6.5
 
-See [additional tips](./nodejs.md) for more info.
-<br>
-<br>
+   # asdf install erlang 22.2.1
+   # asdf global erlang 22.2.1
 
-### Laravel
-#### Install PHP 7.3
-```sh
-sudo apt update 
-sudo apt install software-properties-common
-sudo add-apt-repository ppa:ondrej/php
-sudo apt install \
-   php7.3 \
-   php7.3-common \
-   php7.3-mysql \
-   php7.3-xml \
-   php7.3-xmlrpc \
-   php7.3-curl \
-   php7.3-gd \
-   php7.3-imagick \
-   php7.3-cli \
-   php7.3-dev \
-   php7.3-imap \
-   php7.3-mbstring \
-   php7.3-opcache \
-   php7.3-soap \
-   php7.3-zip \
-   php7.3-gmp \
-   php7.3-intl -y
-```
+   # asdf install elixir 1.9.4
+   # asdf global elixir 1.9.4
 
-#### Install Composer
-``` sh
-php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-php composer-setup.php --install-dir=/home/utku/.local/bin --filename=composer
-```
-
-#### Install Laravel
-``` sh
-composer global require "laravel/installer"
-```
-
-#### Install XDebug
- 1. Clone the [XDebug repo.](https://github.com/xdebug/xdebug)
- 2. From within the repo dir, run the following commands:
-    ``` sh
-    phpize
-    ./configure --enable-xdebug
-    make clean
-    make
-    sudo make install
-    ```
- 3. Add the following lines into your `php.ini`. (You can locate your `php.ini` by running the `php --ini` command)
-    ``` sh
-    zend_extension="xdebug.so"
-
-    [XDebug]
-    xdebug.remote_enable = 1
-    xdebug.remote_autostart = 1
-    ```
- 4. Verify that XDebug is successfuly installed by running the following command (it should match):
-    ``` sh
-    php -v | grep "Xdebug"
-    ```
+   # asdf install nodejs 12.14.0
+   # asdf global nodejs 12.14.0
+   ```
 
 ### Visual Studio Code
- 1. [Download the .deb package](https://code.visualstudio.com/docs/?dv=linux64_deb) 
- 2. Download Extensions
-      - Appearance
-         * Overnight (Slumber) *or* Night Owl 
-         * Material Icon Theme
-      - Editor
-         * Vim
-         * GitLens
-         * EditorConfig for VS Code
-      - Remote Development
-         * Remote - SSH
-         * Remote - SSH: Editing Configuration Files
-         * Remote - SSH: Explorer
-      - Web Development
-         * REST Client
-         * Auto Rename Tag
-         * Live Server
-      - JavaScript & TypeScript
-         * Prettier ([prettierrc](./.prettierrc.yml))
-         * ESLint (`npm install -g eslint`)
-         * ES7 React/Redux/GraphQL/React-Native snippets
-      - PHP
-         * PHP Debug
-         * PHP DocBlocker
-         * PHP Intelephense
-         * phpfmt - PHP formatter
-         * Larevel Blade Snippets
-      - Go
-         * Go
-      - Python
-         * Python
-         * AREPL for python
-         * autoDocstring
-      - Other
-         * Docker
-         * Create Files & Folders: On The Go
- 3. Copy the [settings file](vscode.settings.json) contents into `settings.json`
+1. [Download the .deb package](https://code.visualstudio.com/docs/?dv=linux64_deb) 
+2. Download Extensions
+   - Appearance
+      * Overnight (Slumber) *or* Night Owl 
+      * Material Icon Theme
+   - Editor
+      * Vim
+      * GitLens
+      * EditorConfig for VS Code
+   - Remote Development
+      * Remote - SSH
+      * Remote - SSH: Editing Configuration Files
+      * Remote - SSH: Explorer
+   - Web Development
+      * REST Client
+      * Auto Rename Tag
+      * Live Server
+   - JavaScript & TypeScript
+      * Prettier ([prettierrc](./.prettierrc.yml))
+      * ESLint (`npm install -g eslint`)
+      * ES7 React/Redux/GraphQL/React-Native snippets
+   - PHP
+      * PHP Debug
+      * PHP DocBlocker
+      * PHP Intelephense
+      * phpfmt - PHP formatter
+      * Larevel Blade Snippets
+   - Go
+      * Go
+   - Python
+      * Python
+      * AREPL for python
+      * autoDocstring
+   - Other
+      * Docker
+      * Create Files & Folders: On The Go
+3. Copy the [settings file](vscode.settings.json) contents into `settings.json`
 
 #### Shortcuts
 | Shortcut | Description |
@@ -303,24 +188,24 @@ composer global require "laravel/installer"
 <br>
 
 ### Other Tools
- * [Peek](https://github.com/phw/peek)
-    ```sh
-    sudo add-apt-repository ppa:peek-developers/stable
-    sudo apt update && sudo apt install peek
-    ```
- * [ag](https://github.com/ggreer/the_silver_searcher) & [sack](https://github.com/sampson-chen/sack)
-    ``` sh
-    # 1. install ag
-    sudo apt install silversearcher-ag
-    
-    # 2. install sack
-    git clone https://github.com/sampson-chen/sack.git && \ 
-    cd sack && \ 
-    chmod +x install_sack.sh && \
-    ./install_sack.sh && \
-    cd .. && \
-    rm -rf sack
+* [Peek](https://github.com/phw/peek)
+   ```sh
+   sudo add-apt-repository ppa:peek-developers/stable
+   sudo apt update && sudo apt install peek
    ```
+* [ag](https://github.com/ggreer/the_silver_searcher) & [sack](https://github.com/sampson-chen/sack)
+   ``` sh
+   # 1. install ag
+   sudo apt install silversearcher-ag
+   
+   # 2. install sack
+   git clone https://github.com/sampson-chen/sack.git && \ 
+   cd sack && \ 
+   chmod +x install_sack.sh && \
+   ./install_sack.sh && \
+   cd .. && \
+   rm -rf sack
+```
 <br>
 
 ### Docker
@@ -336,7 +221,7 @@ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add
 
 # 4. add docker respository
 sudo add-apt-repository \
-    "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 
 # 5. install docker
 sudo apt update && sudo apt install docker-ce
@@ -379,20 +264,20 @@ docker run --name <container_name> -p 3306:3306 -e MYSQL_ROOT_PASSWORD=<root_pw>
 ```
 
 #### Connect to MySQL Server from within the Container
- 1. **Run the MySQL Client**
-    ``` sh
-    # check randomly generated password
-    docker logs <container_name> 2>&1 | grep GENERATED
+1. **Run the MySQL Client**
+   ``` sh
+   # check randomly generated password
+   docker logs <container_name> 2>&1 | grep GENERATED
 
-    # run the MySQL client within the MySQL Server container
-    docker exec -it <container_name> mysql -uroot -p
-    ```
-    When prompted, paste the generated password obtained from the previous step.
+   # run the MySQL client within the MySQL Server container
+   docker exec -it <container_name> mysql -uroot -p
+   ```
+   When prompted, paste the generated password obtained from the previous step.
 
- 2. **Reset Root Password**
-    ``` sh
-    ALTER USER 'root'@'localhost' IDENTIFIED BY '<new_password>';
-    ```
+2. **Reset Root Password**
+   ``` sh
+   ALTER USER 'root'@'localhost' IDENTIFIED BY '<new_password>';
+   ```
 
 #### Connect via Client
 ``` sh
@@ -408,27 +293,27 @@ Backup & restore a particular database while MySQL container is running:
 ``` sh
 # backup
 docker exec <mysql_container_name> mysqldump \
-    -u <username> --password=<password> <database_name> > <backup_file>.sql
+   -u <username> --password=<password> <database_name> > <backup_file>.sql
 
 # restore
 cat <backup_file>.sql | docker exec -i <mysql_container_name> mysql \
-    -u <username> --password=<password> <database_name>
+   -u <username> --password=<password> <database_name>
 
 # backup & compress
 docker exec <mysql_container_name> mysqldump \
-    -u <username> --password=<password> <database_name> | gzip -c > <backup_file>.sql.gz 
+   -u <username> --password=<password> <database_name> | gzip -c > <backup_file>.sql.gz 
 
 # decompress & restore
 gzip -d -c <backup_file>.sql.gz | docker exec -i <mysql_container_name> mysql \
-    -u <username> --password=<password> <database_name>
+   -u <username> --password=<password> <database_name>
 ```
 
 See [cheatsheet](https://gist.github.com/bradtraversy/c831baaad44343cc945e76c2e30927b3) for more info.
 <br>
 
 ### DigitalOcean
- 1. Follow the [Initial Server Setup](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-18-04) guide.
- 2. Append public SSH keys of each client machine into the `~/.ssh/authorized_keys` file in droplet.
+1. Follow the [Initial Server Setup](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-18-04) guide.
+2. Append public SSH keys of each client machine into the `~/.ssh/authorized_keys` file in droplet.
 
 ### Useful Commands
 ``` sh

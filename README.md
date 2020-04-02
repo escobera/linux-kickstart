@@ -18,8 +18,10 @@ This was only tested on linux mint 19.3 cinammon.
     - [ASDF](#asdf)
       - [Install ASDF](#install-asdf)
     - [Visual Studio Code](#visual-studio-code)
-      - [Shortcuts](#shortcuts)
+    - [Dbeaver](#dbeaver)
     - [Docker](#docker)
+    - [Postgresql 12](#postgresql-12)
+    - [VPN](#vpn)
     - [Useful Commands](#useful-commands)
 
 ### Common Dependencies And Software
@@ -29,7 +31,7 @@ spotify-client git vim jq automake autoconf \
 libreadline-dev libncurses-dev libssl-dev libyaml-dev \
 libxslt-dev libffi-dev libtool unixodbc-dev unzip \
 build-essential m4 libncurses5-dev libwxgtk3.0-dev libgl1-mesa-dev \
-libglu1-mesa-dev libpng-dev libssh-dev xsltproc fop \
+libglu1-mesa-dev libpng-dev libssh-dev xsltproc fop inotify-tools \
 apt-transport-https ca-certificates software-properties-common
 ```
 
@@ -56,23 +58,25 @@ Source Code Pro
 ### Terminal & Shell
 #### Tilix
 1. Install Tilix
-```sh
-sudo add-apt-repository ppa:webupd8team/terminix
-sudo apt update
-sudo apt install tilix
-```
-  
-  1.2. To fix the vte warnings
-  
-  `sudo ln -s /etc/profile.d/vte-2.91.sh /etc/profile.d/vte.sh`
-
-  1.3. And append to end of `.zshrc`
-
+   
   ```sh
-  if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
-    source /etc/profile.d/vte.sh
-  fi
-  ```
+  sudo add-apt-repository ppa:webupd8team/terminix
+  sudo apt update
+  sudo apt install tilix
+  ``` 
+  * Fix VTE Warnings
+
+    First create the link  
+  
+    `sudo ln -s /etc/profile.d/vte-2.91.sh /etc/profile.d/vte.sh` 
+  
+    then append its sourcing to end of `.zshrc`
+
+    ```sh
+    if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+      source /etc/profile.d/vte.sh
+    fi
+    ```
 
 2. Install Dracula Theme
   ```sh
@@ -155,40 +159,15 @@ sudo apt install tilix
   echo -e "\n. $HOME/.asdf/plugins/java/set-java-home.sh" >> ~/.zshrc
   ```
 ****
+
 ### Visual Studio Code
 1. [Download the .deb package](https://code.visualstudio.com/docs/?dv=linux64_deb) 
-2. Download Extensions
-  - Appearance
-    * Overnight (Slumber) *or* Night Owl 
-    * Material Icon Theme
-  - Editor
-    * GitLens
-  - Web Development
-    * REST Client
-    * Auto Rename Tag
-    * Live Server
-  - JavaScript & TypeScript
-    * Prettier ([prettierrc](./.prettierrc.yml))
-    * ESLint (`npm install -g eslint`)
-    * ES7 React/Redux/GraphQL/React-Native snippets
-  - Go
-    * Go
-  - Python
-    * Python
-    * AREPL for python
-    * autoDocstring
-  - Other
-    * Docker
-    * Create Files & Folders: On The Go
-3. Copy the [settings file](vscode.settings.json) contents into `settings.json`
+2. Install settings sync
 
-#### Shortcuts
-| Shortcut | Description |
-| -------- | ----------- |
-| `Ctrl+B` | Toggle sidebar |
-| `Ctrl+,` | Open settings |
-<br>
-
+### Dbeaver
+1. [Download the .deb package](https://dbeaver.io/download/?start&os=linux&arch=x86_64&dist=deb)
+2. Import project
+   
 ### Docker
 ``` sh
 # 1. remove any older versions
@@ -211,7 +190,6 @@ sudo apt update && sudo apt install docker-ce
 sudo systemctl status docker
 
 # 7. create docker group & add your user
-sudo groupadd docker
 sudo usermod -aG docker $USER
 ```
 
@@ -228,11 +206,29 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.25.4/docker-
 sudo chmod +x /usr/local/bin/docker-compose
 ```
 
-See [cheatsheet](./docker.md) for more info.
+### Postgresql 12
+```sh
+# Add the key
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 
-<br>
+# Add the repo
+sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main" > /etc/apt/sources.list.d/postgresql.list'
 
+# Update & Install
+sudo apt update
+sudo apt install postgresql-12
 
+# Create dev user
+sudo su postgres
+psql
+> CREATE ROLE 'role_name' WITH LOGIN SUPERUSER PASSWORD 'role_password';
+> \q
+```
+
+### VPN
+```sh
+docker run -ti --privileged --rm --net=host -v /etc/resolv.conf:/etc/resolv.conf robertbeal/openconnect:latest --protocol=gp acessoremoto.tjdft.jus.br
+```
 
 ### Useful Commands
 ``` sh

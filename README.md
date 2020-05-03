@@ -142,8 +142,8 @@ Source Code Pro
 
 4. Install plugins (this may vary A LOT)
   ```sh
-  ASDF_CONCURRENCY=4 asdf install ruby 2.6.5
-  asdf global ruby 2.6.5
+  ASDF_CONCURRENCY=4 asdf install ruby 2.6.6
+  asdf global ruby 2.6.6
 
   asdf install erlang 22.3
   asdf global erlang 22.3
@@ -200,7 +200,7 @@ sudo usermod -aG docker $USER
 docker run hello-world
 
 # 9. install docker-compose 1.25.4 (better check newer versions)
-sudo curl -L "https://github.com/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo curl -L "https://github.com/docker/compose/releases/download/1.25.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 
 # 10. apply executable permission
 sudo chmod +x /usr/local/bin/docker-compose

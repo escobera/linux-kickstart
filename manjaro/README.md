@@ -20,7 +20,7 @@
 
 ### Common Dependencies And Software
 ```sh
-sudo pacman -Syu
+sudo pacman-mirrors --fasttrack && sudo pacman -Syyu
 sudo pacman -S git curl zsh exa unzip base-devel yay docker docker-compose
 
 # Make sure you have the Color option in your /etc/pacman.conf

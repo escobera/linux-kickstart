@@ -42,9 +42,13 @@ yay -Y --devel --save
 #### ZSH
 1. Change to Zsh
   * `chsh -s $(which zsh)`
-2. [ZimFW](https://github.com/zimfw/zimfw)
-  * `curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh`
-6. Add git aliases to `.zshrc`
+2. [Powerlevel10k](https://github.com/romkatv/powerlevel10k)
+  ```sh
+  yay -S --noconfirm zsh-theme-powerlevel10k-git
+  echo 'source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
+  ```
+3. Remove manjaro theme from `.zshrc`
+4. Add git aliases to `.zshrc`
   ```sh
   alias gp="git push"
   alias gl="git pull"
